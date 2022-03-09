@@ -24,6 +24,8 @@ namespace BotAir
         }
         public async IEnumerable<ZoneState> Scan()
         {
+            IEnumerable<ZoneState> piece = grid;
+
             for (int i = 1; i < width - 1; i++)
             {
                 for (int j = 1; j < height - 1; j++)
@@ -31,11 +33,11 @@ namespace BotAir
                     bool acc = motion.Move(1);
                     if (acc)
                     {
-                        grid[i, j] = 1;
+                        piece[i, j] = 1;
                     }
                     else
                     {
-                        grid[i, j] = -1;
+                        piece[i, j] = -1;
                         motion.Rotate(-90);
                     }
                 }
@@ -48,17 +50,17 @@ namespace BotAir
                     bool acc = motion.Move(1);
                     if (acc)
                     {
-                        grid[i, j] = 1;
+                        piece[i, j] = 1;
                     }
                     else
                     {
-                        grid[i, j] = -1;
+                        piece[i, j] = -1;
                         motion.Rotate(-90);
                     }
                 }
                 motion.Rotate(-90);
             }
-            return Array.Empty<ZoneState>();
+            return piece;
         }
     }
 }
